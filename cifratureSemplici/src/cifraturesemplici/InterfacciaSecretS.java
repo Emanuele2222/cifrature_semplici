@@ -47,6 +47,7 @@ public class InterfacciaSecretS extends JFrame implements ActionListener {
         this.interfaccia = interfaccia;
         cesare = new JRadioButton("Cesare");
         cesare.setBounds(60, 210, 70, 20);
+        cesare.setSelected(true);
         vigenere = new JRadioButton("Vigenere");
         vigenere.setBounds(150, 210, 80, 20);
         testoLable = new JLabel("Messaggio:");
@@ -110,7 +111,35 @@ public class InterfacciaSecretS extends JFrame implements ActionListener {
 	if (invia == e.getSource()) {
             
             
+            
 	}
 
     }
+    
+    
+    private void inviaMessaggio(){
+        
+        String messaggioCompleto,messaggioCifrato;
+        
+        messaggioCompleto = nomeAgente.getText() + ": " + testoMess.getText();
+        if(cesare.isSelected()){
+           int chiave1 = Integer.parseInt(chiave.getText());
+           messaggioCifrato =  Cesare.cifraMessaggio(messaggioCompleto,chiave1 );
+        }
+        else{
+            messaggioCifrato = Vigenere.cifraMessaggio(messaggioCompleto, chiave.getText());
+        }
+        
+         try {
+            PrintWriter outClient = new PrintWriter(interfaccia.s.getOutputStream(), true);
+            outClient.println(messaggioCifrato);
+            
+        } catch (Exception e) {
+        }
+    }
+    
+    
 }
+
+
+//PULISCI MASCHERA!!!!!!

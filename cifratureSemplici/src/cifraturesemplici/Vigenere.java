@@ -68,8 +68,8 @@ public class Vigenere {
             vettoreChar[i] = space;
         }
     
-    String messCifrato = String.valueOf(vettoreChar); 
-    return messCifrato;
+    String messdeCifrato = String.valueOf(vettoreChar); 
+    return messdeCifrato;
    }
 }
 
