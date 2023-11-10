@@ -90,6 +90,7 @@ public class InterfacciaSecretS extends JFrame implements ActionListener {
         add(p);
        // invia.addActionListener(this);
         esci.addActionListener(this);
+        invia.addActionListener(this);
         try {
             indirizzoS = InetAddress.getLocalHost().getHostAddress();
 
@@ -103,14 +104,16 @@ public class InterfacciaSecretS extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       
+       System.out.println("entrato");
+             
         if (esci == e.getSource()){
            dispose();
         }
+        
         //decremento contatore
 	if (invia == e.getSource()) {
             
-            
+            inviaMessaggio();
             
 	}
 
@@ -133,7 +136,7 @@ public class InterfacciaSecretS extends JFrame implements ActionListener {
          try {
             PrintWriter outClient = new PrintWriter(interfaccia.s.getOutputStream(), true);
             outClient.println(messaggioCifrato);
-            
+           System.out.println(messaggioCifrato);
         } catch (Exception e) {
         }
     }

@@ -103,10 +103,11 @@ public class InterfacciaMenu extends JFrame implements ActionListener {
             ss.setSoTimeout(30000);
             s = ss.accept();
             
-            PrintWriter outServer = new PrintWriter(s.getOutputStream(), true);
+          /*  PrintWriter outServer = new PrintWriter(s.getOutputStream(), true);
             String msg = "ok:";
-            outServer.println(msg);
+            outServer.println(msg);*/
             
+            new InterfacciaSecretI(this);
           
             
         }catch(SocketTimeoutException te){
@@ -121,9 +122,9 @@ public class InterfacciaMenu extends JFrame implements ActionListener {
      public void uniscitiInbox(){
          try {
             s = new Socket(indirizzoClient.getText(), 50001);
-            PrintWriter outServer = new PrintWriter(s.getOutputStream(), true);
+            /*PrintWriter outServer = new PrintWriter(s.getOutputStream(), true);
             String clienMsg = "Ok:";
-            outServer.println(clienMsg);
+            outServer.println(clienMsg);*/
             
             new InterfacciaSecretS(this);
 
