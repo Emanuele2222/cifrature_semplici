@@ -16,10 +16,10 @@ public class CifratureSemplici {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        //InterfacciaMenu interfaccia= new InterfacciaMenu();
+       // InterfacciaMenu interfaccia= new InterfacciaMenu();
         new InterfacciaMenu ();
         
-        //new InterfacciaSecretI (interfaccia);
+       // new InterfacciaSecretI (interfaccia);
         
     }
     
