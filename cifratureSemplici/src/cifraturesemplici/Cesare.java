@@ -54,6 +54,47 @@ public class Cesare {
     }
     
     
+    public static String bruteForce(String mess){
+        
+        String controlloDuePunti = "";
+        int key = 0;
+        String messDecifrato = "";
+        
+        int lunghezza = mess.length();
+        char [] vettoreChar2 = new char [lunghezza];
+        char space; 
+        
+         while(!controlloDuePunti.equals(": ")){
+            
+             char [] vettoreChar = mess.toCharArray();
+            for(int i = 0; i < lunghezza; i++){
+
+                vettoreChar[i] -= key;
+
+                space = vettoreChar[i];
+
+                if(space == '\u001d'){
+                    space = ' ';
+                }
+
+                vettoreChar[i] = space;
+
+            }
+
+             messDecifrato = String.valueOf(vettoreChar);
+             controlloDuePunti = messDecifrato.substring(4,6);
+
+               key ++;
+         }
+       
+        return messDecifrato;
+    }
     
     
-}
+    
+    
+    
+    
+    }
+    
+
