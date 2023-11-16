@@ -17,6 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -27,20 +29,22 @@ import javax.swing.JTextField;
 public class InterfacciaSecretI extends JFrame implements ActionListener{
     
      JPanel p;
-    JButton invia, esci;
+    JButton decripta, esci;
     JComboBox messaggiRicevuti;
     ButtonGroup gruppoBottoni;
     ButtonGroup gruppo1;
-    JLabel testoLable,chiaveLable,nomeAgenteLable;
+    JLabel testoLable,chiaveLable,nomeAgenteLable,criptatiLable;
     JTextField  nomeAgente, chiave;
     JTextArea testoMess;
     JRadioButton cesare;
     JRadioButton vigenere;
+    JRadioButton cesareBf;
     String indirizzoS;
     ServerSocket ss;
     public Socket s;
     AscoltaMessaggi threadAscoltaMessaggi;
-    private InterfacciaMenu interfaccia; 
+    private InterfacciaMenu interfaccia;
+    JScrollPane scroll;
 
     public InterfacciaSecretI(InterfacciaMenu interfaccia) {
         
@@ -51,55 +55,62 @@ public class InterfacciaSecretI extends JFrame implements ActionListener{
         threadAscoltaMessaggi.start();
         //p = (JPanel) this.getContentPane();
         p.setLayout(null);
-        
+        criptatiLable = new JLabel("Messaggi criptati:");
+        criptatiLable.setForeground(Color.white);
+        criptatiLable.setBounds(10, 20, 300, 70);
         messaggiRicevuti = new JComboBox();
-        messaggiRicevuti.setBounds(300, 250, 150, 150);
+        messaggiRicevuti.setBounds(120, 20, 300, 70);
         cesare = new JRadioButton("Cesare");
-        cesare.setBounds(60, 210, 70, 20);
+        cesare.setBounds(60, 230, 70, 20);
         cesare.setSelected(true);
         vigenere = new JRadioButton("Vigenere");
-        vigenere.setBounds(150, 210, 80, 20);
-        testoLable = new JLabel("Messaggio:");
+        vigenere.setBounds(150, 230, 80, 20);
+        cesareBf = new JRadioButton("Brute force Cesare");
+        cesareBf.setBounds(250, 230, 130, 20);
+        testoLable = new JLabel("Messaggio decriptato:");
         testoLable.setForeground(Color.white);
-        testoLable.setBounds(20, 20, 90, 20);
+        testoLable.setBounds(10, 100, 130, 20);
         testoMess = new JTextArea();
-        testoMess.setBounds(90, 20, 300, 70);
+        testoMess.setBounds(140, 100, 350, 70);
         
-        nomeAgenteLable = new JLabel("nome agente:");
+        
+       /* nomeAgenteLable = new JLabel("nome agente:");
          nomeAgenteLable.setForeground(Color.white);
          nomeAgenteLable.setBounds(20, 130, 100, 20);
         nomeAgente = new JTextField();
-        nomeAgente.setBounds(100, 130, 100, 20);
+        nomeAgente.setBounds(100, 130, 100, 20);*/
         
-        chiaveLable = new JLabel("chiave:");
-         chiaveLable.setForeground(Color.white);
-         chiaveLable.setBounds(20, 170, 100, 20);
+        chiaveLable = new JLabel("Chiave:");
+        chiaveLable.setForeground(Color.white);
+        chiaveLable.setBounds(10, 190, 100, 20);
         chiave = new JTextField();
-        chiave.setBounds(90, 170, 100, 20);
+        chiave.setBounds(70, 190, 100, 20);
         esci = new JButton("Esci");
-        esci.setBounds(190, 270, 80, 20);
-        invia = new JButton("Invia");
-        invia.setBounds(20, 270, 80, 20);
+        esci.setBounds(170, 270, 80, 20);
+        decripta = new JButton("Decripta");
+        decripta.setBounds(20, 270, 100, 20);
         gruppoBottoni = new ButtonGroup();
         gruppoBottoni.add(esci);
-        gruppoBottoni.add(invia);
+        gruppoBottoni.add(decripta);
         gruppo1 = new ButtonGroup();
         gruppo1.add(cesare);
         gruppo1.add(vigenere);
         p.add(testoLable);
         p.add(testoMess);
-        p.add(nomeAgenteLable);
-        p.add(nomeAgente);
+        p.add(criptatiLable);
         p.add(chiaveLable);
         p.add(chiave);
         p.add(cesare);
         p.add(vigenere);
+        p.add(cesareBf);
         p.add(messaggiRicevuti);
-        p.add(invia);
+        p.add(decripta);
         p.add(esci);
+        //p.add(scroll);
         add(p);
        // invia.addActionListener(this);
         esci.addActionListener(this);
+        decripta.addActionListener(this);
         try {
             indirizzoS = InetAddress.getLocalHost().getHostAddress();
 
@@ -118,16 +129,36 @@ public class InterfacciaSecretI extends JFrame implements ActionListener{
            dispose();
         }
         //decremento contatore
-	if (invia == e.getSource()) {
+	if (decripta == e.getSource() && !chiave.getText().equals("")) {
             
-            
+            decriptaMessaggio();
             
 	}
 
     }
     
-    void run(){
+    void decriptaMessaggio(){
         
+        String messaggioCriptato,messaggioDecriptato = ""; 
+        
+        messaggioCriptato = messaggiRicevuti.getSelectedItem().toString();
+        
+      //  System.out.println("messaggio criptatoo:" + messaggioCriptato);
+        
+        if(cesare.isSelected()){
+            int chiave1 = Integer.parseInt(chiave.getText());
+            messaggioDecriptato = Cesare.decifraMessaggio(messaggioCriptato, chiave1);
+            
+        }
+        
+        if(vigenere.isSelected()){
+            
+            messaggioDecriptato = Vigenere.decifraMessaggio(messaggioCriptato, chiave.getText());
+            
+        }
+        
+        
+        testoMess.setText(messaggioDecriptato);
     }
     
 }
