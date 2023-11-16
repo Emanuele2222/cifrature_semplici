@@ -111,7 +111,7 @@ public class InterfacciaSecretS extends JFrame implements ActionListener {
         }
         
         //decremento contatore
-	if (invia == e.getSource()) {
+	if (invia == e.getSource() && testoMess.getText().equals("") == false && chiave.getText().equals("") == false) {//cambiata condizione!!!
             
             inviaMessaggio();
             
