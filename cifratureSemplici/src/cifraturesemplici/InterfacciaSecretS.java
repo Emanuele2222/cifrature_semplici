@@ -129,14 +129,16 @@ public class InterfacciaSecretS extends JFrame implements ActionListener {
            int chiave1 = Integer.parseInt(chiave.getText());
            messaggioCifrato =  Cesare.cifraMessaggio(messaggioCompleto,chiave1 );
         }
-        else{
+        else {
             messaggioCifrato = Vigenere.cifraMessaggio(messaggioCompleto, chiave.getText());
         }
         
          try {
             PrintWriter outClient = new PrintWriter(interfaccia.s.getOutputStream(), true);
             outClient.println(messaggioCifrato);
-           System.out.println(messaggioCifrato);
+            testoMess.setText("");
+            chiave.setText("");
+            nomeAgente.setText("");
         } catch (Exception e) {
         }
     }
@@ -145,4 +147,4 @@ public class InterfacciaSecretS extends JFrame implements ActionListener {
 }
 
 
-//PULISCI MASCHERA!!!!!!
+

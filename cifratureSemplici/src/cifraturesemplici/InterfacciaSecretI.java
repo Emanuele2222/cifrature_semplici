@@ -68,7 +68,7 @@ public class InterfacciaSecretI extends JFrame implements ActionListener{
         vigenere = new JRadioButton("Vigenere");
         vigenere.setBounds(150, 230, 80, 20);
         cesareBf = new JRadioButton("Brute force Cesare");
-        cesareBf.setBounds(250, 230, 130, 20);
+        cesareBf.setBounds(250, 230, 140, 20);
         testoLable = new JLabel("Messaggio decriptato:");
         testoLable.setForeground(Color.white);
         testoLable.setBounds(10, 100, 130, 20);
@@ -97,6 +97,7 @@ public class InterfacciaSecretI extends JFrame implements ActionListener{
         gruppo1 = new ButtonGroup();
         gruppo1.add(cesare);
         gruppo1.add(vigenere);
+        gruppo1.add(cesareBf);
         p.add(testoLable);
         p.add(testoMess);
         p.add(criptatiLable);
@@ -131,7 +132,7 @@ public class InterfacciaSecretI extends JFrame implements ActionListener{
            dispose();
         }
         //decremento contatore
-	if (decripta == e.getSource() && !chiave.getText().equals("")) {
+	if (decripta == e.getSource()) {
             
             decriptaMessaggio();
             
@@ -159,6 +160,12 @@ public class InterfacciaSecretI extends JFrame implements ActionListener{
             
         }
         
+        if (cesareBf.isSelected()){
+            
+             messaggioDecriptato = Cesare.bruteForce(messaggioCriptato);
+        
+        
+        }
         
         testoMess.setText(messaggioDecriptato);
     }
