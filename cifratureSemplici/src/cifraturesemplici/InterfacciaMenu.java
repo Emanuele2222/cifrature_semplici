@@ -99,11 +99,11 @@ public class InterfacciaMenu extends JFrame implements ActionListener {
     public void ospitaMessaggi(){
         try {
             
-            ss = new ServerSocket(50001);
+            ss = new ServerSocket(50002);
             ss.setSoTimeout(30000);
             s = ss.accept();
-            
-          /*  PrintWriter outServer = new PrintWriter(s.getOutputStream(), true);
+         /*   
+           PrintWriter outServer = new PrintWriter(s.getOutputStream(), true);
             String msg = "ok:";
             outServer.println(msg);*/
             
@@ -121,7 +121,7 @@ public class InterfacciaMenu extends JFrame implements ActionListener {
     
      public void uniscitiInbox(){
          try {
-            s = new Socket(indirizzoClient.getText(), 50001);
+            s = new Socket(indirizzoClient.getText(), 50002);
             /*PrintWriter outServer = new PrintWriter(s.getOutputStream(), true);
             String clienMsg = "Ok:";
             outServer.println(clienMsg);*/

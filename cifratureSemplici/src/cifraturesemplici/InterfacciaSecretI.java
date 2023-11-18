@@ -51,8 +51,7 @@ public class InterfacciaSecretI extends JFrame implements ActionListener{
         super("Interfaccia SecretI");
         this.interfaccia = interfaccia;
         p = new JPanel();
-        threadAscoltaMessaggi = new AscoltaMessaggi(this, interfaccia);
-        threadAscoltaMessaggi.start();
+        
         //p = (JPanel) this.getContentPane();
         p.setLayout(null);
         criptatiLable = new JLabel("Messaggi criptati:");
@@ -60,6 +59,9 @@ public class InterfacciaSecretI extends JFrame implements ActionListener{
         criptatiLable.setBounds(10, 20, 300, 70);
         messaggiRicevuti = new JComboBox();
         messaggiRicevuti.setBounds(120, 20, 300, 70);
+        threadAscoltaMessaggi = new AscoltaMessaggi(this, interfaccia);
+        System.out.println("partito il thread");
+        threadAscoltaMessaggi.start();
         cesare = new JRadioButton("Cesare");
         cesare.setBounds(60, 230, 70, 20);
         cesare.setSelected(true);
